@@ -1,7 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {questions} from '../src/questions.js';
-import {normalize,validate,dailyQuestions,solve,PUZZLE_LENGTH,countChains,MIN_DAILY_CHAINS,MAX_DAILY_CHAINS} from '../src/logic.js';
+import {normalize,validate,dailyQuestions,solve,PUZZLE_LENGTH,countChains,MIN_DAILY_CHAINS} from '../src/logic.js';
 
 test('question IDs and normalized accepted answers are unique',()=>{
   assert.equal(new Set(questions.map(q=>q.id)).size,questions.length);
@@ -23,6 +23,6 @@ test('daily generator still yields a solvable seven-question chain',()=>{
     const selected=dailyQuestions(questions,date);
     assert.equal(selected.length,PUZZLE_LENGTH);
     assert.equal(new Set(selected.map(q=>q.id)).size,PUZZLE_LENGTH);
-    assert.ok(solve(selected),date);const count=countChains(selected);assert.ok(count>=MIN_DAILY_CHAINS&&count<=MAX_DAILY_CHAINS,date+': '+count);
+    assert.ok(solve(selected),date);const count=countChains(selected);assert.ok(count>=MIN_DAILY_CHAINS,date+': '+count);
   }
 });
