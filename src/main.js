@@ -14,7 +14,7 @@ const esc=s=>String(s).replace(/[&<>\"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;'
 const save=()=>localStorage.setItem(key,JSON.stringify(state));
 const required=i=>i&&state.answers[i-1]?last(state.answers[i-1]):'';
 const broken=i=>i>0&&state.answers[i]&&state.answers[i-1]&&first(state.answers[i])!==last(state.answers[i-1]);
-const currentShare=()=>shareText(date,puzzle,state.answers,state.hinted,state.hints,editorMatch);
+const currentShare=()=>shareText(date,puzzle,state.answers,state.hinted,state.hints,editorMatch,date===today()?'play':'play/'+date);
 const progress=()=>{if(complete(state.answers)){const firstCompletion=!state.completed;const previousBest=state.best?.score??Infinity;state.completed=true;const s=score(state.answers);if(!state.best||s<state.best.score)state.best={score:s,answers:[...state.answers]};if(firstCompletion||s<previousBest){modalOpen=true;celebrating=true;}}save();};
 function switchDate(next,load=true){if(next!==today()&&!availableDates.includes(next))return;date=next;key='tetherd:v2:'+date;try{state={...empty(),...JSON.parse(localStorage.getItem(key)||'{}')};if(!Array.isArray(state.answers)||state.answers.length!==PUZZLE_LENGTH)state=empty();if(!Array.isArray(state.hinted))state.hinted=[];}catch{state=empty();}puzzle=dailyQuestions(questions,date);editorChoiceHash=null;editorMatch=false;current=Math.min(state.revealed,PUZZLE_LENGTH-1);draft=state.answers[current]||'';modalOpen=false;calendarOpen=false;error='';if(load)void loadDaily();}
 function navigate(to){modalOpen=false;celebrating=false;calendarOpen=false;page=to;if(to==='play'&&date!==today())switchDate(today(),true);history.pushState({},'',to==='home'?import.meta.env.BASE_URL:import.meta.env.BASE_URL+to);render();}
