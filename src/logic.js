@@ -66,5 +66,35 @@ export function shareText(date,sequence,answers,hinted=[],hints=0,editor=false){
   const filled=answers.filter(Boolean).length;
   return `tether'd ${date}\n🔗 ${filled}/${sequence.length} · ${score(answers)} letters · ${hints}/3 hints${editor?' · ✨ Editor’s Choice':''}\n${resultSquares(sequence,answers,hinted)}\nhttps://thanoslabs.github.io/tetherd/play`;
 }
+// Determine whether fixed answers can be extended into a complete valid chain.
+// Blank positions may use any accepted answer; filled positions cannot be changed.
+export function canComplete(sequence,answers){
+  if(sequence.length!==answers.length)return false;
+  const memo=new Set();
+  function visit(i,required,used){
+    if(i===sequence.length)return true;
+    const key=i+'|'+required+'|'+[...used].sort().join(',');
+    if(memo.has(key))return false;
+    const fixed=answers[i];
+    const options=fixed?[fixed]:sequence[i].answers;
+    for(const answer of options){
+      const n=normalize(answer);
+      if(!n||!sequence[i].answers.some(a=>normalize(a)===n)||used.has(n)||(required&&first(answer)!==required))continue;
+      used.add(n);
+      if(visit(i+1,last(answer),used))return true;
+      used.delete(n);
+    }
+    memo.add(key);return false;
+  }
+  return visit(0,'',new Set());
+}
+export function resultSquares(sequence,answers,hinted=[]){
+  const possible=canComplete(sequence,answers);
+  return answers.map((answer,i)=>answer?(hinted.includes(i)?'🟨':'🟦'):(possible?'⬛':'🟥')).join('');
+}
+export function shareText(date,sequence,answers,hinted=[],hints=0,editor=false){
+  const filled=answers.filter(Boolean).length;
+  return `tether'd ${date}\n🔗 ${filled}/${sequence.length} · ${score(answers)} letters · ${hints}/3 hints${editor?' · ✨ Editor’s Choice':''}\n${resultSquares(sequence,answers,hinted)}\nhttps://thanoslabs.github.io/tetherd/play`;
+}
 export function seeded(seed){let n=seed>>>0;return ()=>{n=(n+0x6D2B79F5)|0;let t=Math.imul(n^(n>>>15),1|n);t^=t+Math.imul(t^(t>>>7),61|t);return ((t^(t>>>14))>>>0)/4294967296;};}
 export function dailyQuestions(bank,date){const day=Math.floor(Date.parse(date+'T00:00:00Z')/86400000);const rng=seeded(day);for(let attempt=0;attempt<1500;attempt++){const pool=[...bank];for(let i=pool.length-1;i>0;i--){const j=Math.floor(rng()*(i+1));[pool[i],pool[j]]=[pool[j],pool[i]];}const selected=pool.slice(0,PUZZLE_LENGTH);const chains=countChains(selected);if(chains>=MIN_DAILY_CHAINS)return selected;}throw Error('Unable to build a daily puzzle with at least 10 valid chains');}
