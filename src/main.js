@@ -6,14 +6,14 @@ const today=()=>new Date().toISOString().slice(0,10);
 const date=today();let puzzle=dailyQuestions(questions,date);let editorChoiceHash=null;let editorChoiceLetters=null;let editorMatch=false;const key='tetherd:v1:'+date;
 const empty=()=>({answers:Array(8).fill(''),revealed:0,hints:0,hintHistory:[],best:null,completed:false});
 let state;try{state={...empty(),...JSON.parse(localStorage.getItem(key)||'{}')};if(!Array.isArray(state.answers)||state.answers.length!==8)state=empty();}catch{state=empty();}
-let current=0;let error='';let suggestion='';let draft='';let page=location.pathname.replace(/\\/$/,'').endsWith('/play')?'play':'home';
+let current=0;let error='';let suggestion='';let draft='';let page=location.pathname.replace(/\/$/,'').endsWith('/play')?'play':'home';
 const esc=s=>String(s).replace(/[&<>\"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 const save=()=>localStorage.setItem(key,JSON.stringify(state));
 const required=i=>i&&state.answers[i-1]?last(state.answers[i-1]):'';
 const broken=i=>i>0&&state.answers[i]&&state.answers[i-1]&&first(state.answers[i])!==last(state.answers[i-1]);
 const progress=()=>{if(complete(state.answers)){state.completed=true;const s=score(state.answers);if(!state.best||s<state.best.score)state.best={score:s,answers:[...state.answers]};}save();};
 function navigate(to){page=to;history.pushState({},'',to==='play'?import.meta.env.BASE_URL+'play':import.meta.env.BASE_URL);render();}
-window.addEventListener('popstate',()=>{page=location.pathname.replace(/\\/$/,'').endsWith('/play')?'play':'home';render();});
+window.addEventListener('popstate',()=>{page=location.pathname.replace(/\/$/,'').endsWith('/play')?'play':'home';render();});
 async function checkEditorChoice(){if(!editorChoiceHash||!complete(state.answers)){editorMatch=false;return;}const raw=state.answers.map(normalize).join('|');const digest=await crypto.subtle.digest('SHA-256',new TextEncoder().encode(raw));const hex=Array.from(new Uint8Array(digest),b=>b.toString(16).padStart(2,'0')).join('');editorMatch=hex===editorChoiceHash;render();}
 async function loadDaily(){try{const response=await fetch(import.meta.env.BASE_URL+'puzzles/'+date+'.json',{cache:'no-store'});if(!response.ok)throw Error('Not yet published');const data=await response.json();const selected=data.questionIds.map(id=>questions.find(q=>q.id===id));if(data.date!==date||selected.length!==8||selected.some(q=>!q)||new Set(data.questionIds).size!==8||!/^([0-9a-f]{64})$/.test(data.editorChoiceHash))throw Error('Invalid puzzle');puzzle=selected;editorChoiceHash=data.editorChoiceHash;editorChoiceLetters=data.editorChoiceLetters;await checkEditorChoice();}catch(e){console.info('Using deterministic fallback puzzle:',e.message);}render();}
 function render(){document.title='tetherd. — '+(page==='home'?'daily trivia':'today’s chain');app.innerHTML=page==='home'?home():game();bind();}
