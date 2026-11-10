@@ -1,8 +1,11 @@
-import {mkdir,writeFile} from 'node:fs/promises';
+import {mkdir,writeFile,readFile} from 'node:fs/promises';
 import {createHash} from 'node:crypto';
 import {questions} from '../src/questions.js';
 import {dailyQuestions,solve,normalize,PUZZLE_LENGTH,countChains,MIN_DAILY_CHAINS} from '../src/logic.js';
-const date=process.argv[2]||new Date().toISOString().slice(0,10);
+const date=process.argv[2]||new Date(Date.now()+2*86400000).toISOString().slice(0,10);
+const [year,month,day]=date.split('-');
+const file='puzzles/'+year+'/'+month+'/'+day+'.json';
+try{await readFile(file);console.log('Puzzle already exists:',file);process.exit(0);}catch(e){if(e.code!=='ENOENT')throw e;}
 if(!/^\d{4}-\d{2}-\d{2}$/.test(date)||new Date(date+'T00:00:00Z').toISOString().slice(0,10)!==date)throw Error('Invalid UTC date');
 const chosen=dailyQuestions(questions,date);
 const chainCount=countChains(chosen);
@@ -12,6 +15,6 @@ if(!editor||editor.answers.length!==PUZZLE_LENGTH)throw Error('Puzzle is not sol
 const signature=editor.answers.map(normalize).join('|');
 const hash=createHash('sha256').update(signature).digest('hex');
 const payload={date,questionIds:chosen.map(q=>q.id),editorChoiceHash:hash,editorChoiceLetters:editor.cost,minimumVerifiedChainCount:chainCount,version:2};
-await mkdir('public/puzzles',{recursive:true});
-await writeFile('public/puzzles/'+date+'.json',JSON.stringify(payload,null,2)+'\n');
+await mkdir('puzzles/'+year+'/'+month,{recursive:true});
+await writeFile(file,JSON.stringify(payload,null,2)+'\n');
 console.log('Generated',date,'questions:',payload.questionIds.join(', '),'valid chains:',chainCount,'editor letters:',editor.cost);
