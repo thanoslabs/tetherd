@@ -56,3 +56,8 @@
 .archive-calendar-head{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:14px}.archive-calendar-head strong{font-size:15px}.archive-calendar-head .ghost{padding:8px 12px}.archive-grid{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:6px}.archive-weekday{font-size:11px;color:#8fa5c7;text-align:center;padding:5px}.archive-grid .archive-day{min-width:0;padding:10px 0}.archive-day.unavailable{display:block;opacity:.28;cursor:default;text-align:center;border-color:transparent;background:transparent}.archive-caption{font-size:12px;color:#9db0ce;margin:12px 0 0}
 
 .answer-availability{display:inline-block;font-size:.72rem;font-weight:500;letter-spacing:.02em;color:#9fb6d6;margin-top:5px}.entry label .answer-availability{margin-left:8px;white-space:nowrap}
+
+/* Tutorial teaching moments keep the relevant control visible above the dimmer. */
+.tutorial-guide-spotlight{background:rgba(4,10,20,.72)}
+.tutorial-page:has(.tutorial-guide-spotlight) .tutorial-spotlight-target{position:relative;z-index:101;isolation:isolate;outline:3px solid #b3c9ff;outline-offset:5px;border-radius:6px;background:#243954;box-shadow:0 0 0 9px rgba(125,164,245,.16),0 0 24px rgba(125,164,245,.45)}
+.tutorial-page .tutorial-good-luck{font-weight:700;color:#b7d5ff;margin:10px 0}
