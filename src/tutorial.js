@@ -7,7 +7,7 @@ const initial=()=>({answers:Array(puzzle.length).fill(''),revealed:0,best:null})
 let state=initial(),current=0,error='',draft='',correction=null,showFinish=false,celebrate=false,guideStep=0,hintCount=0,hinted=[],hintMessage='',goodLuck=false,guideStandalone=false;
 const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 const finished=()=>state.answers.every(Boolean)&&linked(state.answers)&&new Set(state.answers.map(normalize)).size===puzzle.length;
-const tutorialShare=()=>`tether'd tutorial\n🔗 ${state.answers.filter(Boolean).length}/${puzzle.length} · ${score(state.answers)} letters · ${hintCount} practice hints (unlimited)\n${resultSquares(puzzle,state.answers,hinted)}\nhttps://thanoslabs.github.io/tetherd/tutorial`;
+const tutorialShare=()=>`tether'd tutorial\n🔗 ${state.answers.filter(Boolean).length}/${puzzle.length} · ${score(state.answers)} letters · ${hintCount} practice hints (unlimited)\n${resultSquares(puzzle,state.answers,hinted)}\nhttps://tetherd.thanoslabs.org/tutorial`;
 const prefix=()=>current>0&&state.answers[current-1]?last(state.answers[current-1]):'';
 export function tutorialView(){
  const done=finished();const squares=resultSquares(puzzle,state.answers,hinted);const countLabel=i=>{const required=i>0&&state.answers[i-1]?last(state.answers[i-1]):'';const {matching,total}=answerAvailability(puzzle[i],required);return matching+'/'+total;};
