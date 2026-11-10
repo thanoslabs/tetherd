@@ -61,3 +61,5 @@
 .tutorial-guide-spotlight{background:rgba(4,10,20,.72)}
 .tutorial-page:has(.tutorial-guide-spotlight) .tutorial-spotlight-target{position:relative;z-index:101;isolation:isolate;outline:3px solid #b3c9ff;outline-offset:5px;border-radius:6px;background:#243954;box-shadow:0 0 0 9px rgba(125,164,245,.16),0 0 24px rgba(125,164,245,.45)}
 .tutorial-page .tutorial-good-luck{font-weight:700;color:#b7d5ff;margin:10px 0}
+
+.tutorial-help-icon{display:inline-flex;align-items:center;justify-content:center;flex:none;width:21px;height:21px;margin-left:7px;border:1px solid currentColor;border-radius:50%;background:transparent;color:#a9c3e6;font:600 12px/1 inherit;cursor:pointer;vertical-align:middle;padding:0}.tutorial-help-icon:hover,.tutorial-help-icon:focus-visible{color:#fff;border-color:#fff;background:rgba(147,177,226,.18)}.tutorial-page .hint-row{display:flex;align-items:center;gap:8px}.tutorial-page .hint-row .tutorial-help-icon{margin-left:auto}.tutorial-page .entry label .tutorial-help-icon{vertical-align:middle}
