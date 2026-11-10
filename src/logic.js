@@ -3,6 +3,7 @@ export const MIN_DAILY_CHAINS = 10;
 export const normalize = value => Array.from(value.normalize('NFKD')).filter(ch=>{const cp=ch.codePointAt(0);return cp<0x300||cp>0x36f;}).join('').toLowerCase().replace(/[^a-z]/g,'');
 export const first = value => normalize(value)[0] || '';
 export const last = value => normalize(value).slice(-1);
+export const answerAvailability = (question,required='') => ({matching:question.answers.filter(answer=>!required||first(answer)===required.toLowerCase()).length,total:question.answers.length});
 export const letters = value => normalize(value).length;
 export const score = answers => answers.reduce((n,a)=>n+letters(a),0);
 export const linked = answers => answers.every((a,i)=>!a || i===0 || !answers[i-1] || first(a)===last(answers[i-1]));
