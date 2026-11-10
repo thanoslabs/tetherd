@@ -1,0 +1,20 @@
+{
+  "planet": 1,
+  "animal": 2,
+  "country": 3,
+  "fruit": 4,
+  "color": 5,
+  "instrument": 6,
+  "sport": 7,
+  "element": 8,
+  "city": 9,
+  "bird": 10,
+  "vegetable": 11,
+  "shape": 12,
+  "tree": 13,
+  "language": 14,
+  "weather": 15,
+  "body": 16,
+  "flower": 17,
+  "drink": 18
+}
