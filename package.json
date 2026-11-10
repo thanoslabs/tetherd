@@ -9,9 +9,10 @@
     "preview": "vite preview",
     "test": "node --test",
     "questions:generate": "node scripts/generate-question-index.mjs",
-    "predev": "npm run questions:generate",
-    "prebuild": "npm run questions:generate",
-    "pretest": "npm run questions:generate"
+    "predev": "npm run questions:generate && npm run puzzles:index",
+    "prebuild": "npm run questions:generate && npm run puzzles:index",
+    "pretest": "npm run questions:generate && npm run puzzles:index",
+    "puzzles:index": "node scripts/generate-puzzle-dates.mjs"
   },
   "devDependencies": {
     "vite": "^6.3.5"
