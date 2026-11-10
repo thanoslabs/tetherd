@@ -1,4 +1,4 @@
-export const normalize = value => value.normalize('NFKD').replace(/[\\u0300-\\u036f]/g,'').toLowerCase().replace(/[^a-z]/g,'');
+export const normalize = value => Array.from(value.normalize('NFKD')).filter(ch=>{const cp=ch.codePointAt(0);return cp<0x300||cp>0x36f;}).join('').toLowerCase().replace(/[^a-z]/g,'');
 export const first = value => normalize(value)[0] || '';
 export const last = value => normalize(value).slice(-1);
 export const letters = value => normalize(value).length;
