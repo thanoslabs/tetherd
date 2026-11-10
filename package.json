@@ -7,7 +7,11 @@
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview",
-    "test": "node --test"
+    "test": "node --test",
+    "questions:generate": "node scripts/generate-question-index.mjs",
+    "predev": "npm run questions:generate",
+    "prebuild": "npm run questions:generate",
+    "pretest": "npm run questions:generate"
   },
   "devDependencies": {
     "vite": "^6.3.5"
