@@ -2,7 +2,7 @@ name: Game CI and Pages
 on:
   push:
     branches: [main]
-    paths: ['index.html','src/**','tests/**','package.json','package-lock.json','vite.config.js','.github/workflows/game.yml']
+    paths: ['public/**','public/**','index.html','src/**','tests/**','package.json','package-lock.json','vite.config.js','.github/workflows/game.yml']
   pull_request:
     paths: ['index.html','src/**','tests/**','package.json','package-lock.json','vite.config.js','.github/workflows/game.yml']
   workflow_dispatch:
