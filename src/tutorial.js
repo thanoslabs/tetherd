@@ -21,7 +21,7 @@ export function bindTutorial(render,navigate){
  document.querySelector('#tutorial-copy')?.addEventListener('click',async()=>{try{await navigator.clipboard.writeText(tutorialShare());}catch{}});
  document.querySelector('#tutorial-home')?.addEventListener('click',e=>{e.preventDefault();navigate('home');});
  document.querySelectorAll('[data-tutorial-index]').forEach(el=>el.addEventListener('click',()=>{current=Number(el.dataset.tutorialIndex);draft=state.answers[current]||'';error='';render();}));
- document.querySelector('#tutorial-answer')?.addEventListener('input',e=>{draft=e.target.value;});
+ const input=document.querySelector('#tutorial-answer');if(guideStep===null&&!showFinish)requestAnimationFrame(()=>input?.focus({preventScroll:true}));input?.addEventListener('input',e=>{draft=e.target.value;});input?.addEventListener('keydown',e=>{if(e.key!=='Backspace'||input.value||current===0||guideStep!==null)return;e.preventDefault();current--;draft=state.answers[current]||'';error='';hintMessage='';render();const previous=document.querySelector('#tutorial-answer');previous?.focus({preventScroll:true});previous?.setSelectionRange(previous.value.length,previous.value.length);});
  document.querySelector('#tutorial-form')?.addEventListener('submit',e=>{
   e.preventDefault();const used=state.answers.filter((_,i)=>i!==current);
   const result=validate(puzzle[current],draft,prefix(),used);
