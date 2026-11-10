@@ -4,7 +4,7 @@ import {validate,normalize,first,last,score,linked,resultSquares} from './logic.
 
 const puzzle=config.questionIds.map(id=>questions.find(q=>q.id===id));
 const initial=()=>({answers:Array(puzzle.length).fill(''),revealed:0,best:null});
-let state=initial(),current=0,error='',draft='',showFinish=false,celebrate=false,guideStep=0,hintCount=0,hinted=[],hintMessage='';
+let state=initial(),current=0,error='',draft='',correction=null,showFinish=false,celebrate=false,guideStep=0,hintCount=0,hinted=[],hintMessage='';
 const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 const finished=()=>state.answers.every(Boolean)&&linked(state.answers)&&new Set(state.answers.map(normalize)).size===puzzle.length;
 const tutorialShare=()=>`tether'd tutorial\n🔗 ${state.answers.filter(Boolean).length}/${puzzle.length} · ${score(state.answers)} letters · ${hintCount} practice hints (unlimited)\n${resultSquares(puzzle,state.answers,hinted)}\nhttps://thanoslabs.github.io/tetherd/tutorial`;
@@ -24,8 +24,8 @@ export function bindTutorial(render,navigate){
  document.querySelector('#tutorial-answer')?.addEventListener('input',e=>{draft=e.target.value;});
  document.querySelector('#tutorial-form')?.addEventListener('submit',e=>{
   e.preventDefault();const used=state.answers.filter((_,i)=>i!==current);
-  const result=validate(puzzle[current],draft,prefix(),used);
-  if(result.error){error=result.error;render();return;}
+  const result=validate(puzzle[current],correction??draft,prefix(),used);
+  if(result.error){error=result.error;correction=result.suggestion||null;render();return;}correction=null;
   state.answers[current]=result.answer;
   const unlocked=current===state.revealed&&current<puzzle.length-1;
   if(unlocked){state.revealed++;current=state.revealed;}draft=state.answers[current]||'';error='';
