@@ -1,0 +1,16 @@
+{
+  "id": 1,
+  "prompt": "Name a planet in our solar system",
+  "category": "science",
+  "difficulty": 1,
+  "answers": [
+    "Earth",
+    "Jupiter",
+    "Mars",
+    "Mercury",
+    "Neptune",
+    "Saturn",
+    "Uranus",
+    "Venus"
+  ]
+}
