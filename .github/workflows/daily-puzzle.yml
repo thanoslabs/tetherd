@@ -1,0 +1,37 @@
+name: Generate daily puzzle
+on:
+  schedule:
+    - cron: '15 0 * * *'
+  workflow_dispatch:
+    inputs:
+      date:
+        description: 'UTC date (YYYY-MM-DD); defaults to today'
+        required: false
+        type: string
+permissions:
+  contents: write
+jobs:
+  generate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: true
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Generate and validate daily puzzle
+        env:
+          PUZZLE_DATE: ${{ inputs.date }}
+        run: node scripts/generate-daily.mjs "${PUZZLE_DATE:-$(date -u +%F)}"
+      - name: Commit published puzzle
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add public/puzzles/
+          if git diff --cached --quiet; then
+            echo 'Puzzle already generated'
+            exit 0
+          fi
+          git commit -m "chore: publish daily puzzle $(date -u +%F)"
+          git push
