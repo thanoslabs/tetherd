@@ -1,2 +1,20 @@
-import questions from '../questions/bank.json' with {type:'json'};
-export {questions};
+// Generated from the numbered JSON question files. Regenerate with npm run questions:generate.
+import q1 from '../questions/1.json' with {type:'json'};
+import q2 from '../questions/2.json' with {type:'json'};
+import q3 from '../questions/3.json' with {type:'json'};
+import q4 from '../questions/4.json' with {type:'json'};
+import q5 from '../questions/5.json' with {type:'json'};
+import q6 from '../questions/6.json' with {type:'json'};
+import q7 from '../questions/7.json' with {type:'json'};
+import q8 from '../questions/8.json' with {type:'json'};
+import q9 from '../questions/9.json' with {type:'json'};
+import q10 from '../questions/10.json' with {type:'json'};
+import q11 from '../questions/11.json' with {type:'json'};
+import q12 from '../questions/12.json' with {type:'json'};
+import q13 from '../questions/13.json' with {type:'json'};
+import q14 from '../questions/14.json' with {type:'json'};
+import q15 from '../questions/15.json' with {type:'json'};
+import q16 from '../questions/16.json' with {type:'json'};
+import q17 from '../questions/17.json' with {type:'json'};
+import q18 from '../questions/18.json' with {type:'json'};
+export const questions=[q1,q2,q3,q4,q5,q6,q7,q8,q9,q10,q11,q12,q13,q14,q15,q16,q17,q18];
