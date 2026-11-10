@@ -10,3 +10,17 @@
 .reset-row{text-align:right;margin-top:7px}
 .reset-button{color:#aebcd1;font-size:12px}
 .reset-button:hover{color:#ffd3c5}
+
+.chain-status{display:flex;align-items:center;gap:10px;flex-wrap:wrap;border-top:1px solid #3a4d69;margin-top:16px;padding-top:15px}
+.chain-status-head{display:flex;align-items:center;gap:8px;margin-right:auto}
+.status-squares{display:flex;align-items:center;gap:5px}
+.status-square{display:block;width:17px;height:17px;flex:0 0 17px;border-radius:3px}
+.status-square.blue{background:#69a5f4}.status-square.yellow{background:#f3c74e}.status-square.red{background:#ec7474}.status-square.black{background:#080c14;border:1px solid #60718b}
+.status-help{position:relative;display:inline-grid;place-items:center;width:19px;height:19px;border:1px solid #8295af;border-radius:50%;font-size:11px;color:#cbd8ee;cursor:help}
+.status-tooltip{display:none;position:absolute;bottom:calc(100% + 9px);left:50%;transform:translateX(-50%);width:200px;padding:10px 12px;border:1px solid #526987;border-radius:8px;background:#111b29;color:#e9eff7;line-height:1.6;font-size:12px;z-index:5;box-shadow:0 8px 20px #0005}
+.status-help:hover .status-tooltip,.status-help:focus .status-tooltip{display:block}
+.copy-icon{display:grid;place-items:center;width:30px;height:30px;border:1px solid #435673;border-radius:7px;background:transparent;color:#d7e2f8;cursor:pointer}
+.copy-icon:hover{background:#344963}
+.copy-status{color:#b9caff;font-size:11px}
+.reset-row{text-align:right;margin-top:8px}.reset-button{font-size:12px;color:#aebcd1}
+@media(max-width:480px){.chain-status-head{width:100%}.status-tooltip{left:0;transform:none}}
