@@ -7,7 +7,7 @@ import './style.css';
 // GitHub Pages may redirect the old project URL while retaining /tetherd/ in the path.
 // Normalize legacy deep links before resolving the home, play, or tutorial route.
 if(location.pathname==='/tetherd'||location.pathname.startsWith('/tetherd/')){
- const path=location.pathname.replace(/^\\/tetherd(?=\\/|$)/,'')||'/';
+ const path=location.pathname.slice('/tetherd'.length)||'/';
  history.replaceState(history.state,'',path+location.search+location.hash);
 }
 const app=document.querySelector('#app');
