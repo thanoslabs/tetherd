@@ -4,6 +4,12 @@ import {tutorialView,bindTutorial} from './tutorial.js';
 import {questions} from './questions.js';
 import {normalize,first,last,score,linked,complete,validate,dailyQuestions,PUZZLE_LENGTH,resultSquares,shareText ,answerAvailability} from './logic.js';
 import './style.css';
+// GitHub Pages may redirect the old project URL while retaining /tetherd/ in the path.
+// Normalize legacy deep links before resolving the home, play, or tutorial route.
+if(location.pathname==='/tetherd'||location.pathname.startsWith('/tetherd/')){
+ const path=location.pathname.replace(/^\\/tetherd(?=\\/|$)/,'')||'/';
+ history.replaceState(history.state,'',path+location.search+location.hash);
+}
 const app=document.querySelector('#app');
 const today=()=>{const d=new Date();return [d.getFullYear(),String(d.getMonth()+1).padStart(2,'0'),String(d.getDate()).padStart(2,'0')].join('-');};
 const requestedDate=location.pathname.match(/\/play\/(\d{4}-\d{2}-\d{2})\/?$/)?.[1];let date=requestedDate||today();let puzzle=dailyQuestions(questions,date);let editorChoiceHash=null;let editorChoiceLetters=null;let editorMatch=false;let key='tetherd:v2:'+date;let calendarOpen=false;let calendarMonth=date.slice(0,7);
