@@ -16,7 +16,7 @@ Set **Settings → Pages → Source** to **GitHub Actions**. On merge to main, t
 
 ## Content
 
-18 starter questions in `src/questions.js` carry stable IDs, categories, difficulties, and curated answer pools. A deterministic daily selector verifies solvability using an exact chain solver. Accepted answer lists are curated and expandable. Future work: larger datasets, question cooldowns, difficulty calibration, and optional circular chains.
+18 starter questions in `questions/bank.json` carry stable IDs, categories, difficulties, and curated answer pools. A deterministic daily selector verifies solvability using an exact chain solver. Accepted answer lists are curated and expandable. Future work: larger datasets, question cooldowns, difficulty calibration, and optional circular chains.
 
 ## Roadmap
 
@@ -32,3 +32,9 @@ Introduce an optional backend/API that collects submitted daily results and show
 - **Operations:** rate limiting, basic abuse prevention, retention limits, and versioned puzzle manifests. Preserve the current static GitHub Pages frontend; deploy the API separately.
 
 **Status:** Planned for a later milestone; not part of the current frontend MVP.
+
+## Daily puzzle publishing
+
+The question bank is maintained in `questions/bank.json` (not in JavaScript). Published puzzle manifests are stored in `puzzles/YYYY/MM/DD.json` and copied to the same URL structure by the Vite build. The browser uses the **player's local calendar date** to request that day's manifest; if unavailable or invalid, it falls back to deterministic generation. An open tab refreshes after a local date rollover.
+
+The scheduled workflow runs at 00:15 UTC and ensures manifests exist for **today, tomorrow, and two days ahead** (UTC). Existing manifests are not overwritten, keeping a given day's puzzle stable. A manual workflow dispatch with a date generates only that date. The generator's default CLI date is UTC today +2 days. On a new manifest commit, the daily workflow explicitly dispatches Pages deployment; merge the deployment fix first. Note that this gives a buffer against late scheduled runs but does not guarantee midnight availability if GitHub Actions is delayed beyond the buffer or Pages deployment fails.
