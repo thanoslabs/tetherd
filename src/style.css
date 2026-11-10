@@ -50,3 +50,5 @@
 @keyframes question-reveal{0%{opacity:0;transform:translateY(28px) scale(.97)}100%{opacity:1;transform:translateY(0) scale(1)}}
 .celebration i{animation-duration:3.3s;width:12px;height:22px;box-shadow:0 0 14px #fff5}
 @media(prefers-reduced-motion:reduce){.question.just-unlocked{animation:none}.celebration{display:none}}
+
+.date-button{cursor:pointer;color:#d8e3fa}.date-button:hover,.date-button[aria-expanded="true"]{border-color:#a4b9fa}.archive-calendar{background:#1d2c40;border:1px solid #405577;border-radius:14px;padding:18px;margin-top:18px}.archive-dates{display:grid;grid-template-columns:repeat(auto-fit,minmax(125px,1fr));gap:8px;margin-top:12px}.archive-day{background:#263850;border:1px solid #40516c;color:#dce8fa;border-radius:9px;padding:10px;text-align:center}.archive-day:hover,.archive-day.selected{border-color:#a4b9fa;background:#334c70}.tutorial-guide{z-index:95}.tutorial-guide .completion-modal p{line-height:1.8}.tutorial-page .chain-status{margin-top:12px}.tutorial-page .status-squares{margin:10px 0}.tutorial-page .chain-status small{color:#afc4e5;font-size:11px}
