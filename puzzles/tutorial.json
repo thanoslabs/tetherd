@@ -1,0 +1,19 @@
+{
+  "version": 1,
+  "id": "tutorial",
+  "title": "Learn to tether",
+  "questionIds": [
+    "planet",
+    "animal",
+    "country",
+    "tree",
+    "element"
+  ],
+  "exampleChain": [
+    "Mars",
+    "Snake",
+    "Egypt",
+    "Teak",
+    "Krypton"
+  ]
+}

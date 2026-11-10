@@ -43,3 +43,10 @@
 @keyframes confetti-fall{0%{transform:translateY(-10vh) rotate(var(--rot));opacity:1}100%{transform:translateY(125vh) rotate(900deg);opacity:0}}
 @media(max-width:480px){.game{padding-bottom:370px}.floating-entry{bottom:max(8px,env(safe-area-inset-bottom));padding:14px;max-height:65vh}.floating-entry .entry-head{font-size:10px}.floating-entry label{margin:9px 0}.floating-entry form{flex-direction:row}.floating-entry .primary{padding:12px}.floating-entry .hint-row{margin-top:3px}}
 @media(prefers-reduced-motion:reduce){.question.just-unlocked,.completion-modal,.celebration i{animation:none}.celebration{display:none}}
+
+.tutorial-cta{display:block;margin-top:12px;text-align:left;color:#c4d4ff}
+.tutorial-tip{font-size:12px;color:#afc4e5;margin:8px 0 0;line-height:1.4}
+.question.just-unlocked{animation:question-reveal .9s cubic-bezier(.2,.8,.2,1) both;box-shadow:0 0 0 1px #a4b9fa66}
+@keyframes question-reveal{0%{opacity:0;transform:translateY(28px) scale(.97)}100%{opacity:1;transform:translateY(0) scale(1)}}
+.celebration i{animation-duration:3.3s;width:12px;height:22px;box-shadow:0 0 14px #fff5}
+@media(prefers-reduced-motion:reduce){.question.just-unlocked{animation:none}.celebration{display:none}}
