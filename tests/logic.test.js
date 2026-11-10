@@ -1,7 +1,15 @@
-import test from 'node:test';import assert from 'node:assert/strict';import {questions} from '../src/questions.js';import {normalize,score,validate,linked,complete,solve,dailyQuestions,PUZZLE_LENGTH,countChains,MIN_DAILY_CHAINS} from '../src/logic.js';
+import test from 'node:test';import assert from 'node:assert/strict';import {questions} from '../src/questions.js';import {normalize,score,validate,linked,complete,solve,dailyQuestions,PUZZLE_LENGTH,countChains,MIN_DAILY_CHAINS,answerAvailability} from '../src/logic.js';
 test('normalizes punctuation and counts letters',()=>{assert.equal(normalize('New York!'),'newyork');assert.equal(score(['New York','Mars']),11);});
 test('validates answers and offers typo suggestions',()=>{const q=questions.find(q=>q.id===1);assert.equal(validate(q,'marz').suggestion,'Mars');assert.match(validate(q,'marz').error,/Press Enter to accept/);assert.equal(validate(q,'Mars','m').answer,'Mars');assert.match(validate(q,'Mars','s').error,/start with S/);});
 test('links and completeness',()=>{assert.equal(linked(['Mars','Snake','Egypt']),true);assert.equal(linked(['Mars','Tiger']),false);assert.equal(complete(Array(PUZZLE_LENGTH).fill('Mars')),false);});
 test('daily puzzles are solvable and deterministic',()=>{for(let d=1;d<=20;d++){const date='2026-11-'+String(d).padStart(2,'0');const a=dailyQuestions(questions,date);assert.equal(a.length,PUZZLE_LENGTH);assert.deepEqual(a.map(q=>q.id),dailyQuestions(questions,date).map(q=>q.id));const solution=solve(a);assert.ok(solution);assert.equal(solution.answers.length,PUZZLE_LENGTH);assert.equal(linked(solution.answers),true);const count=countChains(a);assert.ok(count>=MIN_DAILY_CHAINS,date+': '+count);}});
 
 test('chain counter stops at cap and excludes repeated answers',()=>{const pool=Array.from({length:21},(_,i)=>'a'+String.fromCharCode(98+Math.floor(i/26))+String.fromCharCode(98+i%26)+'a');const q=Array.from({length:PUZZLE_LENGTH},()=>({answers:pool}));assert.equal(countChains(q,21),21);const single=Array.from({length:PUZZLE_LENGTH},()=>({answers:['Aa']}));assert.equal(countChains(single),0);});
+
+test('answer availability counts required initial letters and all answers without a requirement',()=>{
+ const q={answers:['Mars','Mercury','Earth','Jupiter']};
+ assert.deepEqual(answerAvailability(q,'m'),{matching:2,total:4});
+ assert.deepEqual(answerAvailability(q,'E'),{matching:1,total:4});
+ assert.deepEqual(answerAvailability(q,''),{matching:4,total:4});
+ assert.deepEqual(answerAvailability(q,'z'),{matching:0,total:4});
+});
