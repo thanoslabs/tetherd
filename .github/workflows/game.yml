@@ -4,7 +4,7 @@ on:
     branches: [main]
     paths: ['public/**','puzzles/**','questions/**','index.html','src/**','tests/**','package.json','package-lock.json','vite.config.js','.github/workflows/game.yml']
   pull_request:
-    paths: ['public/**','index.html','src/**','tests/**','package.json','package-lock.json','vite.config.js','.github/workflows/game.yml']
+    paths: ['public/**','puzzles/**','questions/**','scripts/**','index.html','src/**','tests/**','package.json','package-lock.json','vite.config.js','.github/workflows/game.yml']
   workflow_dispatch:
 permissions:
   contents: read
@@ -28,6 +28,7 @@ jobs:
         run: |
           mkdir -p dist/play
           cp dist/index.html dist/play/index.html
+          cp dist/index.html dist/404.html
       - uses: actions/upload-pages-artifact@v3
         if: github.ref == 'refs/heads/main' && github.event_name != 'pull_request'
         with:
