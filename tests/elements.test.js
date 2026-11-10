@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import {questions} from '../src/questions.js';
 import {normalize,validate} from '../src/logic.js';
 test('periodic table has all 118 elements plus US/UK spelling variants',()=>{
- const element=questions.find(q=>q.id==='element');
+ const element=questions.find(q=>q.id===8);
  assert.equal(element.answers.length,120);
  for(const name of ['Oganesson','Copernicium','Tennessine','Nihonium','Aluminum','Aluminium','Cesium','Caesium']){
   assert.equal(validate(element,name,'',[]).error,undefined,name);
