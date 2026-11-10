@@ -12,7 +12,7 @@ test('question IDs and normalized accepted answers are unique',()=>{
 });
 
 test('common missing answers are accepted',()=>{
-  for(const [id,answer] of [['fruit','Tomato'],['country','Ecuador'],['country','England'],['country','Scotland'],['country','Wales'],['country','Northern Ireland']]){
+  for(const [id,answer] of [[4,'Tomato'],[3,'Ecuador'],[3,'England'],[3,'Scotland'],[3,'Wales'],[3,'Northern Ireland']]){
     const q=questions.find(q=>q.id===id);
     assert.equal(validate(q,answer,'',[]).error,undefined,id+': '+answer);
   }
