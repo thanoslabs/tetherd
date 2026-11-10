@@ -24,3 +24,22 @@
 .copy-status{color:#b9caff;font-size:11px}
 .reset-row{text-align:right;margin-top:8px}.reset-button{font-size:12px;color:#aebcd1}
 @media(max-width:480px){.chain-status-head{width:100%}.status-tooltip{left:0;transform:none}}
+
+/* Keep the answer composer accessible while scrolling the question list. */
+.game{padding-bottom:350px}
+.floating-entry{position:fixed;z-index:20;bottom:16px;left:50%;transform:translateX(-50%);width:min(680px,calc(100vw - 24px));margin:0;box-shadow:0 14px 50px #0009;max-height:min(70vh,440px);overflow-y:auto;overscroll-behavior:contain}
+.question.just-unlocked{animation:question-reveal .55s ease-out both}
+@keyframes question-reveal{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:translateY(0)}}
+.best-actions{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;margin-top:22px;padding:12px 0;color:#b8c8e0;font-size:13px}
+.best-actions button{margin-left:auto}
+.modal-backdrop{position:fixed;inset:0;z-index:90;display:grid;place-items:center;padding:18px;background:#050b17d9;backdrop-filter:blur(7px)}
+.completion-modal{width:min(470px,100%);max-height:90vh;overflow:auto;background:#21334b;border:1px solid #7893bc;border-radius:20px;padding:clamp(22px,5vw,36px);box-shadow:0 24px 90px #000b;animation:modal-pop .42s cubic-bezier(.18,1.35,.35,1) both;text-align:center}
+.completion-modal h2{font-size:clamp(36px,8vw,55px);letter-spacing:-.05em;margin:12px 0}.completion-modal p{color:#c2d1e8}
+.modal-share{text-align:left;white-space:pre-wrap;overflow-wrap:anywhere;background:#111d2e;border:1px solid #435775;border-radius:12px;padding:18px;line-height:1.75;color:#f0f5ff;font:inherit;font-size:14px}
+.modal-actions{display:flex;align-items:center;justify-content:center;gap:20px;flex-wrap:wrap}
+@keyframes modal-pop{from{opacity:0;transform:translateY(22px) scale(.9)}to{opacity:1;transform:translateY(0) scale(1)}}
+.celebration{position:fixed;inset:0;z-index:100;pointer-events:none;overflow:hidden}
+.celebration i{position:absolute;left:var(--x);top:-12%;width:9px;height:18px;background:hsl(calc(var(--i)*37deg) 88% 68%);border-radius:2px;animation:confetti-fall 2.1s var(--delay) ease-in forwards}
+@keyframes confetti-fall{0%{transform:translateY(-10vh) rotate(var(--rot));opacity:1}100%{transform:translateY(125vh) rotate(900deg);opacity:0}}
+@media(max-width:480px){.game{padding-bottom:370px}.floating-entry{bottom:max(8px,env(safe-area-inset-bottom));padding:14px;max-height:65vh}.floating-entry .entry-head{font-size:10px}.floating-entry label{margin:9px 0}.floating-entry form{flex-direction:row}.floating-entry .primary{padding:12px}.floating-entry .hint-row{margin-top:3px}}
+@media(prefers-reduced-motion:reduce){.question.just-unlocked,.completion-modal,.celebration i{animation:none}.celebration{display:none}}
