@@ -1,0 +1,16 @@
+{
+  "date": "2026-11-10",
+  "questionIds": [
+    "drink",
+    "instrument",
+    "element",
+    "vegetable",
+    "planet",
+    "language",
+    "fruit"
+  ],
+  "editorChoiceHash": "a80a04cc1833fdb2142a945fa47354081bb2c7d5979377291bebaa49f65bbc8f",
+  "editorChoiceLetters": 51,
+  "minimumVerifiedChainCount": 10,
+  "version": 2
+}
