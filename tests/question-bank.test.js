@@ -1,7 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {questions} from '../src/questions.js';
-import {normalize,validate,dailyQuestions,solve} from '../src/logic.js';
+import {normalize,validate,dailyQuestions,solve,PUZZLE_LENGTH} from '../src/logic.js';
 
 test('question IDs and normalized accepted answers are unique',()=>{
   assert.equal(new Set(questions.map(q=>q.id)).size,questions.length);
@@ -18,11 +18,11 @@ test('common missing answers are accepted',()=>{
   }
 });
 
-test('daily generator still yields a solvable eight-question chain',()=>{
+test('daily generator still yields a solvable seven-question chain',()=>{
   for(const date of ['2026-11-10','2026-11-11','2026-12-01']){
     const selected=dailyQuestions(questions,date);
-    assert.equal(selected.length,8);
-    assert.equal(new Set(selected.map(q=>q.id)).size,8);
+    assert.equal(selected.length,PUZZLE_LENGTH);
+    assert.equal(new Set(selected.map(q=>q.id)).size,PUZZLE_LENGTH);
     assert.ok(solve(selected),date);
   }
 });
