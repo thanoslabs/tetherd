@@ -5,7 +5,7 @@ on:
   workflow_dispatch:
     inputs:
       date:
-        description: 'UTC date (YYYY-MM-DD); defaults to today'
+        description: 'UTC date (YYYY-MM-DD); optional single-date override'
         required: false
         type: string
 permissions:
@@ -24,13 +24,22 @@ jobs:
       - name: Generate and validate daily puzzle
         env:
           PUZZLE_DATE: ${{ inputs.date }}
-        run: node scripts/generate-daily.mjs "${PUZZLE_DATE:-$(date -u +%F)}"
+        run: |
+          if [ -n "$PUZZLE_DATE" ]; then
+            node scripts/generate-daily.mjs "$PUZZLE_DATE"
+          else
+            # Backfill today and tomorrow, and stage the puzzle two UTC days ahead.
+            for offset in 0 1 2; do
+              day=$(date -u -d "+$offset day" +%F)
+              node scripts/generate-daily.mjs "$day"
+            done
+          fi
       - name: Commit published puzzle
         id: publish
         run: |
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git add public/puzzles/
+          git add puzzles/
           if git diff --cached --quiet; then
             echo 'Puzzle already generated'
             echo 'changed=false' >> "$GITHUB_OUTPUT"
