@@ -62,9 +62,9 @@ export function resultSquares(sequence,answers,hinted=[]){
   const possible=canComplete(sequence,answers);
   return answers.map((answer,i)=>answer?(hinted.includes(i)?'🟨':'🟦'):(possible?'⬛':'🟥')).join('');
 }
-export function shareText(date,sequence,answers,hinted=[],hints=0,editor=false){
+export function shareText(date,sequence,answers,hinted=[],hints=0,editor=false,playPath='play'){
   const filled=answers.filter(Boolean).length;
-  return `tether'd ${date}\n🔗 ${filled}/${sequence.length} · ${score(answers)} letters · ${hints}/3 hints${editor?' · ✨ Editor’s Choice':''}\n${resultSquares(sequence,answers,hinted)}\nhttps://thanoslabs.github.io/tetherd/play`;
+  return `tether'd ${date}\n🔗 ${filled}/${sequence.length} · ${score(answers)} letters · ${hints}/3 hints${editor?' · ✨ Editor’s Choice':''}\n${resultSquares(sequence,answers,hinted)}\nhttps://thanoslabs.github.io/tetherd/${playPath}`;
 }
 export function seeded(seed){let n=seed>>>0;return ()=>{n=(n+0x6D2B79F5)|0;let t=Math.imul(n^(n>>>15),1|n);t^=t+Math.imul(t^(t>>>7),61|t);return ((t^(t>>>14))>>>0)/4294967296;};}
 export function dailyQuestions(bank,date){const day=Math.floor(Date.parse(date+'T00:00:00Z')/86400000);const rng=seeded(day);for(let attempt=0;attempt<1500;attempt++){const pool=[...bank];for(let i=pool.length-1;i>0;i--){const j=Math.floor(rng()*(i+1));[pool[i],pool[j]]=[pool[j],pool[i]];}const selected=pool.slice(0,PUZZLE_LENGTH);const chains=countChains(selected);if(chains>=MIN_DAILY_CHAINS)return selected;}throw Error('Unable to build a daily puzzle with at least 10 valid chains');}

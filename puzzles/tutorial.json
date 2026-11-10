@@ -3,11 +3,11 @@
   "id": "tutorial",
   "title": "Learn to tether",
   "questionIds": [
-    "planet",
-    "animal",
-    "country",
-    "tree",
-    "element"
+    1,
+    2,
+    3,
+    13,
+    8
   ],
   "exampleChain": [
     "Mars",

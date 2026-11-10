@@ -1,0 +1,31 @@
+{
+  "id": 18,
+  "prompt": "Name a non-alcoholic drink",
+  "category": "food",
+  "difficulty": 1,
+  "answers": [
+    "Apple Juice",
+    "Cocoa",
+    "Coconut Water",
+    "Coffee",
+    "Cola",
+    "Espresso",
+    "Hot Chocolate",
+    "Iced Tea",
+    "Juice",
+    "Kombucha",
+    "Lassi",
+    "Latte",
+    "Lemonade",
+    "Limeade",
+    "Milk",
+    "Milkshake",
+    "Orange Juice",
+    "Root Beer",
+    "Smoothie",
+    "Soda",
+    "Sparkling Water",
+    "Tea",
+    "Water"
+  ]
+}
