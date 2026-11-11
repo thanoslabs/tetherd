@@ -64,13 +64,16 @@
 
 .tutorial-help-icon{display:inline-flex;align-items:center;justify-content:center;flex:none;width:21px;height:21px;margin-left:7px;border:1px solid currentColor;border-radius:50%;background:transparent;color:#a9c3e6;font:600 12px/1 inherit;cursor:pointer;vertical-align:middle;padding:0}.tutorial-help-icon:hover,.tutorial-help-icon:focus-visible{color:#fff;border-color:#fff;background:rgba(147,177,226,.18)}.tutorial-page .hint-row{display:flex;align-items:center;gap:8px}.tutorial-page .hint-row .tutorial-help-icon{margin-left:auto}.tutorial-page .entry label .tutorial-help-icon{vertical-align:middle}
 
-/* Landing: each middle word exposes both of its connecting letters. */
-.thread .thread-word{display:inline-flex;align-items:center;white-space:nowrap}
-.thread .thread-join{position:relative;isolation:isolate;padding:0 2px;cursor:default}
-.thread .thread-join::after{content:"";position:absolute;z-index:2;pointer-events:none;left:50%;top:50%;width:calc(100% + 43px);height:38px;transform:translate(-50%,-50%) scale(.85);border:2px dotted #b9caff;border-radius:50%;opacity:0;transition:opacity .18s,transform .18s}
-.thread:hover .thread-join::after{opacity:1;transform:translate(-50%,-50%) scale(1)}
+/* Landing: highlight both ends of GAME, with hover ovals around joining pairs. */
+.thread{gap:0;flex-wrap:nowrap}
+.thread .thread-word{display:inline-flex;align-items:center;white-space:nowrap;position:relative;z-index:1}
+.thread .thread-link{position:relative;display:inline-flex;align-items:center;justify-content:center;min-width:34px;align-self:stretch;color:#778ba7;cursor:default}
+.thread .thread-link b{position:relative;z-index:1;font-weight:750}
+.thread .thread-link::after{content:"";position:absolute;z-index:2;pointer-events:none;left:50%;top:50%;width:calc(100% + 48px);height:52px;transform:translate(-50%,-50%) scale(.85);border:2px dotted #b9caff;border-radius:50%;opacity:0;transition:opacity .18s,transform .18s}
+.thread:hover .thread-link::after,.thread .thread-link:hover::after{opacity:1;transform:translate(-50%,-50%) scale(1)}
 .thread .join-letter{color:#b9caff}
-@media(prefers-reduced-motion:reduce){.thread .thread-join::after{transition:none}}
+@media(max-width:480px){.thread .thread-word{padding:8px 7px;font-size:clamp(10px,3vw,14px)}.thread .thread-link{min-width:20px}.thread .thread-link::after{width:calc(100% + 30px);height:42px}}
+@media(prefers-reduced-motion:reduce){.thread .thread-link::after{transition:none}}
 
 /* The board shows the chain, not trivia metadata; the composer owns the prompt. */
 .chain-board{position:relative;gap:8px;padding-bottom:30px}
