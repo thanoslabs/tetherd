@@ -69,10 +69,10 @@
 .thread .thread-word{display:inline-flex;align-items:center;white-space:nowrap;position:relative;z-index:1}
 .thread .thread-link{position:relative;display:inline-flex;align-items:center;justify-content:center;min-width:34px;align-self:stretch;color:#778ba7;cursor:default}
 .thread .thread-link b{position:relative;z-index:1;font-weight:750}
-.thread .thread-link::after{content:"";position:absolute;z-index:2;pointer-events:none;left:50%;top:50%;width:calc(100% + 48px);height:52px;transform:translate(-50%,-50%) scale(.85);border:2px dotted #b9caff;border-radius:50%;opacity:0;transition:opacity .18s,transform .18s}
+.thread .thread-link::after{content:"";position:absolute;z-index:2;pointer-events:none;left:50%;top:50%;width:calc(100% + 48px);height:44px;transform:translate(-50%,-50%) scale(.85);border:2px dotted #b9caff;border-radius:12px;opacity:0;transition:opacity .18s,transform .18s}
 .thread:hover .thread-link::after,.thread .thread-link:hover::after{opacity:1;transform:translate(-50%,-50%) scale(1)}
 .thread .join-letter{color:#b9caff}
-@media(max-width:480px){.thread .thread-word{padding:8px 7px;font-size:clamp(10px,3vw,14px)}.thread .thread-link{min-width:20px}.thread .thread-link::after{width:calc(100% + 30px);height:42px}}
+@media(max-width:480px){.thread .thread-word{padding:8px 7px;font-size:clamp(10px,3vw,14px)}.thread .thread-link{min-width:20px}.thread .thread-link::after{width:calc(100% + 30px);height:38px;border-radius:10px}}
 @media(prefers-reduced-motion:reduce){.thread .thread-link::after{transition:none}}
 
 /* The board shows the chain, not trivia metadata; the composer owns the prompt. */
