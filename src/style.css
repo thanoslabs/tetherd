@@ -67,7 +67,7 @@
 /* Landing: highlight both ends of GAME, with hover ovals around joining pairs. */
 .thread{gap:0;flex-wrap:nowrap}
 .thread .thread-word{display:inline-flex;align-items:center;white-space:nowrap;position:relative;z-index:1}
-.thread .thread-link{position:relative;display:inline-flex;align-items:center;justify-content:center;min-width:34px;align-self:stretch;color:#778ba7;cursor:default}
+.thread .thread-link{background:none;border-radius:0;padding:0;font-weight:inherit;letter-spacing:normal;position:relative;display:inline-flex;align-items:center;justify-content:center;min-width:34px;align-self:stretch;color:#778ba7;cursor:default}
 .thread .thread-link b{position:relative;z-index:1;font-weight:750}
 .thread .thread-link::after{content:"";position:absolute;z-index:2;pointer-events:none;left:50%;top:50%;width:calc(100% + 48px);height:44px;transform:translate(-50%,-50%) scale(.85);border:2px dotted #b9caff;border-radius:12px;opacity:0;transition:opacity .18s,transform .18s}
 .thread:hover .thread-link::after,.thread .thread-link:hover::after{opacity:1;transform:translate(-50%,-50%) scale(1)}
