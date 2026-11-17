@@ -1,0 +1,16 @@
+{
+  "date": "2026-11-19",
+  "questionIds": [
+    1,
+    10,
+    15,
+    16,
+    18,
+    17,
+    7
+  ],
+  "editorChoiceHash": "374ba96dd33bda409a9468e77d755dd636c25867d24ba5ec3dbb4efad90dce35",
+  "editorChoiceLetters": 45,
+  "minimumVerifiedChainCount": 10,
+  "version": 2
+}
